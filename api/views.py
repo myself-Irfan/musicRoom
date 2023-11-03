@@ -1,3 +1,4 @@
+import logging
 from rest_framework import generics, status
 from .serializers import RoomSerializer, CreateRoomSerializer, UpdateRoomSerializer
 from .models import Room
@@ -7,6 +8,9 @@ from django.utils import timezone
 from django.shortcuts import get_object_or_404
 from django.db import transaction
 from django.http import JsonResponse
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 # generics.ListAPIView is used to handle HTTP Get requests
@@ -28,6 +32,7 @@ class GetRoom(APIView):
 
         # if code is empty
         if not code:
+            logging.error(f'Code not found in request')
             return Response({'Bad Request': 'Code parameter not found in request'}, status=status.HTTP_400_BAD_REQUEST)
 
         # retrieves room obj from Room db filtering with code var in code col and if failed, raises 404

@@ -125,38 +125,30 @@ const Room = (props) => {
 
     return (
         <Grid container spacing={1}>
-        <Grid item xs={12} align="center">
-            <Typography variant="h4" component="h4">
-              Code: {roomCode}
-            </Typography>
-          </Grid>
-          <MusicPlayer
-            time={state.song.time}
-            duration={state.song.duration}
-            image_url={state.song.image_url}
-            title={state.song.title}
-            artist={state.song.artist}
-            is_playing={state.song.is_playing}
-          />
-          <Grid item xs={12} align="center">
-            <Typography variant="h6" component="h6">
-              Votes : {state.song.votes} / {state.song.votes_required}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} align="center">
-            <Typography variant="h6" component="h6">
-              Guest Can Pause: {state.guestCanPause.toString()}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} align="center">
-            <Typography variant="h6" component="h6">
-              Host: {state.isHost.toString()}
-            </Typography>
-          </Grid>
-          {state.isHost ? renderSettingsButton() : null}
-          <Grid item xs={12} align="center">
-            <Button variant="contained" color="secondary" onClick={leaveButtonPressed}>Leave Room</Button>
-          </Grid>
+            <Grid item xs={12} align="center">
+                <Typography variant="h4" component="h4">Code: {roomCode}</Typography>
+            </Grid>
+            <MusicPlayer
+                time={state.song.time}
+                duration={state.song.duration}
+                image_url={state.song.image_url}
+                title={state.song.title}
+                artist={state.song.artist}
+                is_playing={state.song.is_playing}
+            />
+            <Grid item xs={12} align="center">
+                <Typography variant="h6" component="h6">Votes : {state.song.votes} / {state.song.votes_required}</Typography>
+            </Grid>
+            <Grid item xs={12} align="center">
+                <Typography variant="h6" component="h6">Guest Can Pause: {state.guestCanPause.toString()}</Typography>
+            </Grid>
+            <Grid item xs={12} align="center">
+                <Typography variant="h6" component="h6">Host: {state.isHost.toString()}</Typography>
+            </Grid>
+            {state.isHost ? renderSettingsButton() : null}
+            <Grid item xs={12} align="center">
+                <Button variant="contained" color="secondary" onClick={leaveButtonPressed}>Leave Room</Button>
+            </Grid>
         </Grid>
     );
 }

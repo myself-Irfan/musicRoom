@@ -1,7 +1,4 @@
 from django.shortcuts import redirect, get_object_or_404
-
-from api.models import Room
-from .models import Vote
 from .credentials import REDIRECT_URI, CLIENT_SECRET, CLIENT_ID
 from rest_framework.views import APIView
 from requests import Request, post
@@ -9,8 +6,12 @@ from rest_framework import status
 from rest_framework.response import Response
 from .utils import *
 
+from api.models import Room
+from .models import Vote
+
 # Create your views here.
 BASE_URL = "https://api.spotify.com/v1/me/"
+
 
 class AuthURL(APIView):
     def get(self, request, format=None):
@@ -29,7 +30,7 @@ class AuthURL(APIView):
 
 def spotify_callback(request, format=None):
     code = request.GET.get('code')
-    error = request.GET.get('error')
+    # error = request.GET.get('error')
 
     response = post('https://accounts.spotify.com/api/token', data={
         'grant_type': 'authorization_code',
@@ -39,13 +40,13 @@ def spotify_callback(request, format=None):
         'client_secret': CLIENT_SECRET
     }).json()
 
-    print(f'Spotify response: {response}')
+    # print(f'Spotify response: {response}')
 
     access_token = response.get('access_token')
     token_type = response.get('token_type')
     refresh_token = response.get('refresh_token')
     expires_in = response.get('expires_in')
-    error = response.get('error')
+    # error = response.get('error')
 
     if not request.session.exists(request.session.session_key):
         request.session.create()
