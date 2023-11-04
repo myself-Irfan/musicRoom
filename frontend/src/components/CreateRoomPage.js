@@ -125,7 +125,7 @@ export default function CreateRoomPage({
             </Grid>
             <Grid item xs={12} align="center">
                 <FormControl>
-                    <TextField required type="number" onChange={handleVotesChange} defaultValue={votesToSkip} inputProps={{ min: 1, style: { textAlign: "center"}, }}/>
+                    <TextField required type="number" onChange={handleVotesChange} defaultValue={votesToSkip} inputProps={{ min: 1, style: { textAlign: "center", backgroundColor: "white"} }}/>
                     <FormHelperText><span align="center">Votes Required To Skip Song</span></FormHelperText>
                 </FormControl>
             </Grid>
